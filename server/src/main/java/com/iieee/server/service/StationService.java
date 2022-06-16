@@ -1,5 +1,6 @@
 package com.iieee.server.service;
 
+import com.iieee.server.app.dto.sensor.SensorListResponseDto;
 import com.iieee.server.app.dto.station.StationListResponseDto;
 import com.iieee.server.app.dto.station.StationResponseDto;
 import com.iieee.server.app.dto.station.StationSaveRequestDto;
@@ -28,6 +29,15 @@ public class StationService {
     public StationResponseDto findById(Long id) {
         Station entity = stationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("There is no station. id=" + id));
         return new StationResponseDto(entity);
+    }
+
+    @Transactional
+    public List<SensorListResponseDto> getSensorListById(Long id) {
+        Station entity = stationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("There is no station. id=" + id));
+
+        return entity.getSensors().stream()
+                .map(SensorListResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     @Transactional
