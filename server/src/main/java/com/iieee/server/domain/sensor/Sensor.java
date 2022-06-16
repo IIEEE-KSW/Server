@@ -43,4 +43,12 @@ public class Sensor {
         this.sunLight = sunLight;
         this.dateTime = dateTime;
     }
+
+    public void setStation(Station station) {
+        this.station = station;
+
+        if (!station.getSensors().contains(this)) {
+            station.getSensors().add(this);
+        }
+    }
 }
