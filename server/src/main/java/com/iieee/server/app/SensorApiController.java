@@ -1,5 +1,6 @@
 package com.iieee.server.app;
 
+import com.iieee.server.app.dto.sensor.SensorListRequestDto;
 import com.iieee.server.app.dto.sensor.SensorListResponseDto;
 import com.iieee.server.app.dto.sensor.SensorResponseDto;
 import com.iieee.server.app.dto.sensor.SensorSaveRequestDto;
@@ -22,6 +23,11 @@ public class SensorApiController {
 
     @GetMapping("/{id}")
     public SensorResponseDto findById(@PathVariable Long id) { return sensorService.findById(id); }
+
+    @GetMapping("/stations/{station_id}")
+    public List<SensorListResponseDto> retrieveSensorListByDateTimeAndStation(@PathVariable Long station_id, @ModelAttribute SensorListRequestDto requestDto) {
+        return sensorService.findSensorListByDateTimeAndStation(station_id, requestDto);
+    }
 
     @PostMapping("/stations/{station_id}")
     public Long save(@PathVariable Long station_id, @ModelAttribute SensorSaveRequestDto sensor) {

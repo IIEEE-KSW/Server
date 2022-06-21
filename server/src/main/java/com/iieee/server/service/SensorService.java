@@ -1,5 +1,6 @@
 package com.iieee.server.service;
 
+import com.iieee.server.app.dto.sensor.SensorListRequestDto;
 import com.iieee.server.app.dto.sensor.SensorListResponseDto;
 import com.iieee.server.app.dto.sensor.SensorResponseDto;
 import com.iieee.server.app.dto.sensor.SensorSaveRequestDto;
@@ -33,6 +34,16 @@ public class SensorService {
         System.out.print(entity);
         return new SensorResponseDto(entity);
     }
+
+    @Transactional(readOnly = true)
+    public List<SensorListResponseDto> findSensorListByDateTimeAndStation(Long station_id, SensorListRequestDto requestDto) {
+        Station linkedStation = stationRepository.findById(station_id).orElseThrow(() -> new IllegalArgumentException("There is no station. id=" + station_id));
+        List<Sensor> sensors = sensorRepository.findByDateTimeBetweenAndStation(requestDto.getStartDateTime(), requestDto.getEndDateTime(), linkedStation);
+        return sensors.stream()
+                .map(SensorListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
 
     @Transactional
     public Long save(Long station_id, SensorSaveRequestDto requestDto) {
