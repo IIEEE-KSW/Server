@@ -3,7 +3,6 @@ package com.iieee.server.app.dto.sensor;
 import com.iieee.server.domain.sensor.Sensor;
 import com.iieee.server.domain.sensor.type.Soil;
 import com.iieee.server.domain.sensor.type.Wind;
-import com.iieee.server.domain.station.Station;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
