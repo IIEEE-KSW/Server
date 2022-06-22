@@ -17,9 +17,7 @@ public class StationApiController {
     private final StationService stationService;
 
     @GetMapping
-    public List<StationListResponseDto> retrieveAllStations() {
-        return stationService.findAll();
-    }
+    public List<StationListResponseDto> retrieveAllStations() { return stationService.findAll(); }
 
     @GetMapping("/{id}")
     public StationResponseDto findById(@PathVariable Long id) { return stationService.findById(id); }
