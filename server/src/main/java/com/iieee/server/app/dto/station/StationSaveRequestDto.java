@@ -15,6 +15,7 @@ public class StationSaveRequestDto {
     // Location
     private Double latitude;
     private Double longitude;
+    private String zipCode;
 
     public Station toEntity() {
         Location location = locationToEntity();
@@ -29,6 +30,7 @@ public class StationSaveRequestDto {
         return Location.builder()
                 .latitude(latitude)
                 .longitude(longitude)
+                .zipCode(zipCode)
                 .build();
     }
 }
