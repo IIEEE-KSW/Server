@@ -16,9 +16,13 @@ public class Location {
     // 경도
     private Double longitude;
 
+    // Zip code
+    private String zipCode;
+
     @Builder
-    public Location(Double latitude, Double longitude) {
+    public Location(Double latitude, Double longitude, String zipCode) {
         this.latitude = latitude;
         this.longitude = longitude;
+        this.zipCode = zipCode;
     }
 }
