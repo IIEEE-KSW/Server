@@ -1,6 +1,6 @@
 package com.iieee.server.domain.sensor;
 
-import com.iieee.server.domain.sensor.type.Soil;
+import com.iieee.server.domain.sensor.type.Air;
 import com.iieee.server.domain.station.Station;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,7 +22,7 @@ public class Sensor {
     private Station station;
 
     @Embedded
-    private Soil soil;
+    private Air air;
 
     private Double windSpeed;
 
@@ -32,8 +32,8 @@ public class Sensor {
     private LocalDateTime dateTime;
 
     @Builder
-    public Sensor(Soil soil, Double windSpeed, Double uv, Double sunLight, LocalDateTime dateTime) {
-        this.soil = soil;
+    public Sensor(Air air, Double windSpeed, Double uv, LocalDateTime dateTime) {
+        this.air = air;
         this.windSpeed = windSpeed;
         this.uv = uv;
         this.dateTime = dateTime;
