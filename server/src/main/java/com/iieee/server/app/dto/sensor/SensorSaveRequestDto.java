@@ -1,7 +1,7 @@
 package com.iieee.server.app.dto.sensor;
 
 import com.iieee.server.domain.sensor.Sensor;
-import com.iieee.server.domain.sensor.type.Soil;
+import com.iieee.server.domain.sensor.type.Air;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class SensorSaveRequestDto {
-    // Soil
-    private Double soilTemperature;
-    private Double soilHumidity;
+    // Air
+    private Double airTemperature;
+    private Double airHumidity;
 
     private Double windSpeed;
 
@@ -26,29 +26,29 @@ public class SensorSaveRequestDto {
     private LocalDateTime dateTime;
 
     @Builder
-    public SensorSaveRequestDto(Double soilTemperature, Double soilHumidity, Double windSpeed, Double uv, LocalDateTime dateTime) {
-        this.soilTemperature = soilTemperature;
-        this.soilHumidity = soilHumidity;
+    public SensorSaveRequestDto(Double airTemperature, Double airHumidity, Double windSpeed, Double uv, LocalDateTime dateTime) {
+        this.airTemperature = airTemperature;
+        this.airHumidity = airHumidity;
         this.windSpeed = windSpeed;
         this.uv = uv;
         this.dateTime = dateTime;
     }
 
     public Sensor toEntity() {
-        Soil soil = soilToEntity();
+        Air air = airToEntity();
 
         return Sensor.builder()
-                .soil(soil)
+                .air(air)
                 .windSpeed(windSpeed)
                 .uv(uv)
                 .dateTime(dateTime)
                 .build();
     }
 
-    private Soil soilToEntity() {
-        return Soil.builder()
-                .temperature(soilTemperature)
-                .humidity(soilHumidity)
+    private Air airToEntity() {
+        return Air.builder()
+                .temperature(airTemperature)
+                .humidity(airHumidity)
                 .build();
     }
 }
