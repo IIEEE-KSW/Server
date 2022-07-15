@@ -25,12 +25,12 @@ public class SensorApiController {
     public SensorResponseDto findById(@PathVariable Long id) { return sensorService.findById(id); }
 
     @GetMapping("/stations/{station_id}")
-    public List<SensorListResponseDto> retrieveSensorListByDateTimeAndStation(@PathVariable Long station_id, @ModelAttribute SensorListRequestDto requestDto) {
+    public List<SensorListResponseDto> retrieveSensorListByDateTimeAndStation(@PathVariable Long station_id, @RequestBody SensorListRequestDto requestDto) {
         return sensorService.findSensorListByDateTimeAndStation(station_id, requestDto);
     }
 
     @PostMapping("/stations/{station_id}")
-    public Long save(@PathVariable Long station_id, @ModelAttribute SensorSaveRequestDto sensor) {
+    public Long save(@PathVariable Long station_id, @RequestBody SensorSaveRequestDto sensor) {
         return sensorService.save(station_id, sensor);
     }
 
