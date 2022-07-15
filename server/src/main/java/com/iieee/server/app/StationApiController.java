@@ -26,7 +26,7 @@ public class StationApiController {
     public List<SensorListResponseDto> getSensorListById(@PathVariable Long id) { return stationService.getSensorListById(id); }
 
     @PostMapping
-    public Long save(@ModelAttribute StationSaveRequestDto station) {
+    public Long save(@RequestBody StationSaveRequestDto station) {
         return stationService.save(station);
     }
 
