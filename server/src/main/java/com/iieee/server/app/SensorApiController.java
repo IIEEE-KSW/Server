@@ -29,6 +29,11 @@ public class SensorApiController {
         return sensorService.findSensorListByDateTimeAndStation(station_id, requestDto);
     }
 
+    @GetMapping("/stations/{station_id}/1")
+    public SensorResponseDto retrieveLatestByStation(@PathVariable Long station_id) {
+        return sensorService.findLatestByStation(station_id);
+    }
+
     @PostMapping("/stations/{station_id}")
     public Long save(@PathVariable Long station_id, @RequestBody SensorSaveRequestDto sensor) {
         return sensorService.save(station_id, sensor);
