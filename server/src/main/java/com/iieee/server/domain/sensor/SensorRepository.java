@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface SensorRepository extends JpaRepository<Sensor, Long> {
     List<Sensor> findByDateTimeBetweenAndStation(LocalDateTime start, LocalDateTime end, Station station);
+    Sensor findTopByStation(Station station);
 }
