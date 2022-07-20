@@ -58,7 +58,7 @@ public class SensorService {
     }
 
     @Transactional(readOnly = true)
-    public SensorResponseDto findTopByStationOrderByIdDesc(Long station_id) {
+    public SensorResponseDto findLatestByStation(Long station_id) {
         Station linkedStation = stationRepository.findById(station_id).orElseThrow(() -> new IllegalArgumentException("There is no station. id=" + station_id));
         Optional<Sensor> sensor = sensorRepository.findTopByStationOrderByIdDesc(linkedStation);
         return sensor.map(SensorResponseDto::new).orElse(null);
