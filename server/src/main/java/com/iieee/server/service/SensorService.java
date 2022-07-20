@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -34,7 +35,6 @@ public class SensorService {
     @Transactional(readOnly = true)
     public SensorResponseDto findById(Long id) {
         Sensor entity = sensorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("There is no sensor. id=" + id));
-        System.out.print(entity);
         return new SensorResponseDto(entity);
     }
 
@@ -55,6 +55,13 @@ public class SensorService {
         }
 
         return responseDtos;
+    }
+
+    @Transactional(readOnly = true)
+    public SensorResponseDto findTopByStationOrderByIdDesc(Long station_id) {
+        Station linkedStation = stationRepository.findById(station_id).orElseThrow(() -> new IllegalArgumentException("There is no station. id=" + station_id));
+        Optional<Sensor> sensor = sensorRepository.findTopByStationOrderByIdDesc(linkedStation);
+        return sensor.map(SensorResponseDto::new).orElse(null);
     }
 
     @Transactional
