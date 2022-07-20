@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SensorRepository extends JpaRepository<Sensor, Long> {
     List<Sensor> findByDateTimeBetweenAndStation(LocalDateTime start, LocalDateTime end, Station station);
-    Sensor findTopByStation(Station station);
+    Optional<Sensor> findTopByStationOrderByIdDesc(Station station);
 }
