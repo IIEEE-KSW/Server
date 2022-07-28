@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +18,9 @@ public class Station {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String eui;
+
     private String name;
 
     @Embedded
@@ -26,7 +30,8 @@ public class Station {
     private List<Sensor> sensors;
 
     @Builder
-    public Station(String name, Location location) {
+    public Station(String eui, String name, Location location) {
+        this.eui = eui;
         this.name = name;
         this.location = location;
     }
