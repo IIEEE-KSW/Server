@@ -65,12 +65,26 @@ public class SensorService {
     }
 
     @Transactional
-    public Long save(String eui, SensorSaveRequestDto requestDto) {
-        Station linkedStation = stationRepository.findByEui(eui).orElseThrow(() -> new IllegalArgumentException("There is no station. id=" + station_id));
+    public Long save(Long station_id, SensorSaveRequestDto requestDto) {
+        Station linkedStation = stationRepository.findById(station_id).orElseThrow(() -> new IllegalArgumentException("There is no station. id=" + station_id));
 
         Sensor savedSensor = requestDto.toEntity();
 
         savedSensor.setStation(linkedStation);
+
+        return sensorRepository.save(savedSensor).getId();
+    }
+
+    @Transactional
+    public Long save(String eui, SensorSaveRequestDto requestDto) {
+        Optional<Station> linkedStation = stationRepository.findByEui(eui);
+        if (linkedStation.isEmpty()) {
+            throw new IllegalArgumentException("There is no station. eui=" + eui);
+        }
+
+        Sensor savedSensor = requestDto.toEntity();
+
+        savedSensor.setStation(linkedStation.get());
 
         return sensorRepository.save(savedSensor).getId();
     }
