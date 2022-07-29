@@ -7,5 +7,7 @@ import java.util.Optional;
 
 @Repository
 public interface StationRepository extends JpaRepository<Station, Long> {
+    @Deprecated
     Optional<Station> findByEui(String eui);
+    Optional<Station> findBySenetCityId(Long senetCityId);
 }
