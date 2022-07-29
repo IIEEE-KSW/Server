@@ -1,6 +1,6 @@
 package com.iieee.server.app;
 
-import com.iieee.server.app.dto.network.ParseSenetRequestDtoToSensorSaveRequestDto;
+import com.iieee.server.app.dto.network.ParseSenetRequestDto;
 import com.iieee.server.app.dto.network.SenetRequestDto;
 import com.iieee.server.app.dto.sensor.SensorListResponseDto;
 import com.iieee.server.app.dto.sensor.SensorResponseDto;
@@ -43,7 +43,8 @@ public class SensorApiController {
 
     @PostMapping
     public Long save(@RequestBody SenetRequestDto requestDto) {
-        return sensorService.save(requestDto.getEui(), new ParseSenetRequestDtoToSensorSaveRequestDto(requestDto).getSensorSaveRequestDto());
+        ParseSenetRequestDto parseSenetRequestDto = new ParseSenetRequestDto(requestDto);
+        return sensorService.saveBySenet(parseSenetRequestDto.getSenetCityId(), parseSenetRequestDto.toSensorSaveRequestDto());
     }
 
     @DeleteMapping("/{id}")

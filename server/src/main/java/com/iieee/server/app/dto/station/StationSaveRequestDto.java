@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StationSaveRequestDto {
+    private Long senetCityId;
     private String eui;
     private String name;
     // Location
@@ -21,6 +22,7 @@ public class StationSaveRequestDto {
         Location location = locationToEntity();
 
         return Station.builder()
+                .senetCityId(senetCityId)
                 .eui(eui)
                 .name(name)
                 .location(location)

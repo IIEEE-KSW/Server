@@ -76,6 +76,21 @@ public class SensorService {
     }
 
     @Transactional
+    public Long saveBySenet(Long senet_city_id, SensorSaveRequestDto requestDto) {
+        Optional<Station> linkedStation = stationRepository.findBySenetCityId(senet_city_id);
+        if (linkedStation.isEmpty()) {
+            throw new IllegalArgumentException("There is no station. senet_city_id=" + senet_city_id);
+        }
+
+        Sensor savedSensor = requestDto.toEntity();
+
+        savedSensor.setStation(linkedStation.get());
+
+        return sensorRepository.save(savedSensor).getId();
+    }
+
+    @Deprecated
+    @Transactional
     public Long save(String eui, SensorSaveRequestDto requestDto) {
         Optional<Station> linkedStation = stationRepository.findByEui(eui);
         if (linkedStation.isEmpty()) {
