@@ -29,8 +29,8 @@ public class ParseSenetRequestDto {
         return new SensorSaveRequestDto(
                 Double.parseDouble(valueList.get(1)),
                 Double.parseDouble(valueList.get(2)),
-                Double.parseDouble(valueList.get(3)),
                 Double.parseDouble(valueList.get(4)),
+                Double.parseDouble(valueList.get(3)),
                 this.dataTime
         );
     }
